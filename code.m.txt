@@ -1,0 +1,23 @@
+Data_type=1;
+
+ncdisp('D:\Desktop\CP302-CAPSTONE\NCEP DATA\air_temp_m_2_monthly(2001).nc')
+
+lat=ncread('D:\Desktop\CP302-CAPSTONE\NCEP DATA\air_temp_m_2_monthly(2001).nc','lat');
+lon=ncread('D:\Desktop\CP302-CAPSTONE\NCEP DATA\air_temp_m_2_monthly(2001).nc','lon');
+time=ncread('D:\Desktop\CP302-CAPSTONE\NCEP DATA\air_temp_m_2_monthly(2001).nc','time');
+
+temp{1,1}=ncread('D:\Desktop\CP302-CAPSTONE\NCEP DATA\air_temp_m_2_monthly(2001).nc','air');
+
+count=0;   %%% grid count
+for LON=1:size(lon,1)
+    count
+    for LAT=1:size(lat,1)
+        TEMP{Data_type,1}(count+1,1:2)=[lon(LON,1) lat(LAT,1)];
+        count2=0; %%% data count or year count
+        for CASE=1:size(temp,1)
+            TEMP{Data_type,2}{count+1,1}(count2+1:count2+size(squeeze(temp{CASE,1}(LON,LAT,:)),1),1)=squeeze(temp{CASE,1}(LON,LAT,:));
+            count2=count2+size(squeeze(temp{CASE,1}(LON,LAT,:)),1);
+        end
+        count=count+1;
+    end
+end
